@@ -1,0 +1,306 @@
+<html><head><base href="https://ingressos-parques.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartão Digital de Divulgação - Ingressos para Parques</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        background-color: #111;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        max-width: 400px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .header {
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 0 0 10px #fff;
+    }
+    .content {
+        padding: 20px;
+    }
+    .ticket {
+        margin-bottom: 30px;
+        border: 2px solid #ff00ff;
+        border-radius: 10px;
+        padding: 15px;
+        position: relative;
+        overflow: hidden;
+    }
+    .ticket::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+            from 0deg,
+            transparent 0deg 340deg,
+            #ff00ff 340deg 360deg
+        );
+        animation: rotate 4s linear infinite;
+    }
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .ticket-content {
+        position: relative;
+        z-index: 1;
+        background-color: #111;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    h2 {
+        margin: 0 0 10px 0;
+        color: #00ffff;
+        text-shadow: 0 0 5px #00ffff;
+    }
+    p {
+        margin: 0 0 10px 0;
+    }
+    .price {
+        font-weight: bold;
+        color: #ff00ff;
+        text-shadow: 0 0 5px #ff00ff;
+    }
+    .quantity {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+    .quantity button {
+        background-color: #ff00ff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .quantity button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px #ff00ff;
+    }
+    .quantity span {
+        font-size: 18px;
+        margin: 0 10px;
+    }
+    .whatsapp-btn {
+        background-color: #25D366;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+        background-color: #128C7E;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">Ingressos para Parques</div>
+        <div class="content">
+            <p>Todos os ingressos são emitidos em nome do comprador</p>
+            <p>Ingressos para Semana e Final de Semana</p>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Thermas dos Laranjais</h2>
+                    <p>Aproveite as melhores piscinas e toboáguas do Brasil!</p>
+                    <p class="price">R$ 100,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('thermas', -1)">-</button>
+                        <span id="thermas-quantity">0</span>
+                        <button onclick="changeQuantity('thermas', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Aquário de SP</h2>
+                    <p>Explore o fascinante mundo marinho no coração de São Paulo!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('aquario', -1)">-</button>
+                        <span id="aquario-quantity">0</span>
+                        <button onclick="changeQuantity('aquario', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Zoológico de SP + Mundo dos Dinossauros</h2>
+                    <p>Conheça animais de todo o mundo e viaje no tempo com os dinossauros!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('zoo', -1)">-</button>
+                        <span id="zoo-quantity">0</span>
+                        <button onclick="changeQuantity('zoo', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Animália Park</h2>
+                    <p>Diversão garantida para toda a família com animais e atrações!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('animalia', -1)">-</button>
+                        <span id="animalia-quantity">0</span>
+                        <button onclick="changeQuantity('animalia', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Hopi Hari</h2>
+                    <p>Aventure-se nas montanhas-russas e atrações radicais!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('hopi', -1)">-</button>
+                        <span id="hopi-quantity">0</span>
+                        <button onclick="changeQuantity('hopi', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Magic City</h2>
+                    <p>Divirta-se no maior parque aquático coberto da América Latina!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('magic', -1)">-</button>
+                        <span id="magic-quantity">0</span>
+                        <button onclick="changeQuantity('magic', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Beto Carrero</h2>
+                    <p>O maior parque temático da América Latina espera por você!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('beto', -1)">-</button>
+                        <span id="beto-quantity">0</span>
+                        <button onclick="changeQuantity('beto', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Smart Fit</h2>
+                    <p>Mantenha-se em forma com acesso às melhores academias!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('smartfit', -1)">-</button>
+                        <span id="smartfit-quantity">0</span>
+                        <button onclick="changeQuantity('smartfit', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Natus's Barber (PG)</h2>
+                    <p>Corte à vontade por 30 dias na melhor barbearia da região!</p>
+                    <p class="price">R$ 100,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('barber', -1)">-</button>
+                        <span id="barber-quantity">0</span>
+                        <button onclick="changeQuantity('barber', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Camarote dos Ídolos do SP (open bar e food)</h2>
+                    <p>Experiência VIP com open bar e food no melhor camarote!</p>
+                    <p class="price">R$ 250,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('camarote', -1)">-</button>
+                        <span id="camarote-quantity">0</span>
+                        <button onclick="changeQuantity('camarote', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <p>Garanta já o seu ingresso e aproveite momentos inesquecíveis!</p>
+            
+            <a href="#" class="whatsapp-btn" onclick="sendWhatsApp()">Comprar no WhatsApp</a>
+        </div>
+    </div>
+
+    <script>
+        const tickets = {
+            thermas: { price: 100, quantity: 0 },
+            aquario: { price: 50, quantity: 0 },
+            zoo: { price: 50, quantity: 0 },
+            animalia: { price: 80, quantity: 0 },
+            hopi: { price: 80, quantity: 0 },
+            magic: { price: 50, quantity: 0 },
+            beto: { price: 80, quantity: 0 },
+            smartfit: { price: 80, quantity: 0 },
+            barber: { price: 100, quantity: 0 },
+            camarote: { price: 250, quantity: 0 }
+        };
+
+        function changeQuantity(ticket, change) {
+            tickets[ticket].quantity = Math.max(0, tickets[ticket].quantity + change);
+            document.getElementById(`${ticket}-quantity`).textContent = tickets[ticket].quantity;
+        }
+
+        function sendWhatsApp() {
+            let message = "Olá! Gostaria de comprar os seguintes ingressos:\n\n";
+            let total = 0;
+
+            for (const [ticket, data] of Object.entries(tickets)) {
+                if (data.quantity > 0) {
+                    const subtotal = data.price * data.quantity;
+                    message += `${ticket.charAt(0).toUpperCase() + ticket.slice(1)}: ${data.quantity} x R$ ${data.price.toFixed(2)} = R$ ${subtotal.toFixed(2)}\n`;
+                    total += subtotal;
+                }
+            }
+
+            message += `\nTotal: R$ ${total.toFixed(2)}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.we/5513974173380?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
