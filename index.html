@@ -131,7 +131,6 @@
             <p>Todos os ingressos são emitidos em nome do comprador</p>
             <p>Ingressos para Semana e Final de Semana</p>
 
-            <!-- Lista de ingressos -->
             <div class="ticket">
                 <div class="ticket-content">
                     <h2>Thermas dos Laranjais</h2>
@@ -145,7 +144,122 @@
                 </div>
             </div>
 
-            <!-- Outros ingressos omitidos para brevidade -->
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Aquário de SP</h2>
+                    <p>Explore o fascinante mundo marinho no coração de São Paulo!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('aquario', -1)">-</button>
+                        <span id="aquario-quantity">0</span>
+                        <button onclick="changeQuantity('aquario', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Zoológico de SP + Mundo dos Dinossauros</h2>
+                    <p>Conheça animais de todo o mundo e viaje no tempo com os dinossauros!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('zoo', -1)">-</button>
+                        <span id="zoo-quantity">0</span>
+                        <button onclick="changeQuantity('zoo', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Animália Park</h2>
+                    <p>Diversão garantida para toda a família com animais e atrações!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('animalia', -1)">-</button>
+                        <span id="animalia-quantity">0</span>
+                        <button onclick="changeQuantity('animalia', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Hopi Hari</h2>
+                    <p>Aventure-se nas montanhas-russas e atrações radicais!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('hopi', -1)">-</button>
+                        <span id="hopi-quantity">0</span>
+                        <button onclick="changeQuantity('hopi', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Magic City</h2>
+                    <p>Divirta-se no maior parque aquático coberto da América Latina!</p>
+                    <p class="price">R$ 50,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('magic', -1)">-</button>
+                        <span id="magic-quantity">0</span>
+                        <button onclick="changeQuantity('magic', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Beto Carrero</h2>
+                    <p>O maior parque temático da América Latina espera por você!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('beto', -1)">-</button>
+                        <span id="beto-quantity">0</span>
+                        <button onclick="changeQuantity('beto', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Smart Fit</h2>
+                    <p>Mantenha-se em forma com acesso às melhores academias!</p>
+                    <p class="price">R$ 80,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('smartfit', -1)">-</button>
+                        <span id="smartfit-quantity">0</span>
+                        <button onclick="changeQuantity('smartfit', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Natus's Barber (PG)</h2>
+                    <p>Corte à vontade por 30 dias na melhor barbearia da região!</p>
+                    <p class="price">R$ 100,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('barber', -1)">-</button>
+                        <span id="barber-quantity">0</span>
+                        <button onclick="changeQuantity('barber', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket-content">
+                    <h2>Camarote do Fogo (Setor S)</h2>
+                    <p>Entre para o camarote e curta a melhor vista do show!</p>
+                    <p class="price">R$ 250,00</p>
+                    <div class="quantity">
+                        <button onclick="changeQuantity('camarote', -1)">-</button>
+                        <span id="camarote-quantity">0</span>
+                        <button onclick="changeQuantity('camarote', 1)">+</button>
+                    </div>
+                </div>
+            </div>
 
             <a href="#" class="whatsapp-btn" onclick="sendWhatsApp()">Comprar no WhatsApp</a>
         </div>
