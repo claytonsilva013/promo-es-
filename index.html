@@ -1,568 +1,371 @@
-<html><head><base href="https://casadosingressos.com/">
+<html><head><base href="https://websim.creation.engine/" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casa dos Ingressos - Parques Temáticos</title>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<title>Casa dos Ingressos - Parques de Diversão</title>
+<audio id="addToCartSound" src="https://websim.creation.engine/sounds/success.mp3"></audio>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #1a1a1a;
-        margin: 0;
-        padding: 0;
-        color: #fff;
-        overflow-x: hidden;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #000033, #000066);
+    color: #00ffff;
+    overflow-x: hidden;
+  }
+  .container {
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  h1 {
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+    animation: neonPulse 1.5s infinite alternate;
+  }
+  .highlight {
+    font-size: 1.8em;
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(0, 255, 255, 0.1);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+    animation: highlightPulse 2s infinite alternate;
+  }
+  .btn {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid #25D366;
+    color: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 10px #25D366;
+    box-shadow: 0 0 10px #25D366, inset 0 0 10px #25D366;
+    transition: all 0.3s ease;
+  }
+  .btn svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    fill: #25D366;
+  }
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #25D366, 0 0 30px #25D366, 0 0 40px #25D366;
+  }
+  .park-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .park-item {
+    background-color: rgba(0, 255, 255, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  .park-name {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ffff;
+  }
+  .park-description {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  .park-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff;
+  }
+  .quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .quantity-btn {
+    background-color: #00ffff;
+    color: #000033;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  .quantity-btn:hover {
+    background-color: #ffffff;
+  }
+  .quantity {
+    margin: 0 15px;
+    font-size: 1.2em;
+  }
+  #total {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+  }
+  @keyframes neonPulse {
+    from {
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
     }
-
-    .neon-border {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        z-index: 9999;
+    to {
+      text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff;
     }
-
-    .neon-border::before,
-    .neon-border::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 4px solid transparent;
-        border-image: linear-gradient(
-            45deg,
-            #ff00de,
-            #00ff00,
-            #00ffff,
-            #ff00de
-        ) 1;
-        animation: neon-border 3s linear infinite;
+  }
+  @keyframes highlightPulse {
+    from {
+      box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
     }
-
-    .neon-border::after {
-        animation-direction: reverse;
+    to {
+      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
     }
-
-    @keyframes neon-border {
-        0% {
-            border-image-slice: 1;
-            filter: brightness(1);
-        }
-        50% {
-            border-image-slice: 2;
-            filter: brightness(1.5);
-        }
-        100% {
-            border-image-slice: 1;
-            filter: brightness(1);
-        }
-    }
-
-    header {
-        background-color: rgba(0, 0, 0, 0.8);
-        text-align: center;
-        padding: 2em;
-        position: relative;
-        overflow: hidden;
-    }
-
-    h1 {
-        font-family: 'Permanent Marker', cursive;
-        font-size: 4em;
-        margin: 0;
-        color: #ffffff;
-        text-shadow: 
-            0 0 5px #00ffff,
-            0 0 10px #00ffff,
-            0 0 15px #00ffff,
-            0 0 20px #0000ff,
-            0 0 35px #0000ff,
-            0 0 40px #0000ff,
-            0 0 50px #0000ff,
-            0 0 75px #0000ff;
-        animation: neon 1.5s ease-in-out infinite alternate, shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
-    }
-
-    @keyframes neon {
-        from {
-            text-shadow: 
-                0 0 5px #00ffff,
-                0 0 10px #00ffff,
-                0 0 15px #00ffff,
-                0 0 20px #0000ff,
-                0 0 35px #0000ff,
-                0 0 40px #0000ff,
-                0 0 50px #0000ff,
-                0 0 75px #0000ff;
-        }
-        to {
-            text-shadow: 
-                0 0 10px #00ffff,
-                0 0 20px #00ffff,
-                0 0 30px #00ffff,
-                0 0 40px #0000ff,
-                0 0 70px #0000ff,
-                0 0 80px #0000ff,
-                0 0 100px #0000ff,
-                0 0 150px #0000ff;
-        }
-    }
-
-    @keyframes shake {
-        10%, 90% { transform: translate3d(-1px, 0, 0); }
-        20%, 80% { transform: translate3d(2px, 0, 0); }
-        30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-        40%, 60% { transform: translate3d(4px, 0, 0); }
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .ticket {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(255, 0, 222, 0.5);
-        margin-bottom: 20px;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
-    }
-
-    .ticket:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(255, 0, 222, 0.8);
-    }
-
-    .ticket-info {
-        flex-grow: 1;
-    }
-
-    .ticket h2 {
-        margin-top: 0;
-        color: #00ffff;
-        text-shadow: 0 0 5px #00ffff;
-    }
-
-    .ticket p {
-        margin: 5px 0;
-    }
-
-    .price {
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #00ff00;
-        text-shadow: 0 0 5px #00ff00;
-    }
-
-    .quantity {
-        display: flex;
-        align-items: center;
-    }
-
-    .quantity button {
-        background-color: #ff00de;
-        border: none;
-        color: white;
-        padding: 10px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: all 0.3s ease, transform 0.1s ease;
-    }
-
-    .quantity button:hover {
-        background-color: #00ffff;
-        transform: scale(1.1);
-    }
-
-    .quantity button:active {
-        transform: scale(0.9) rotate(5deg);
-    }
-
-    .quantity input {
-        width: 40px;
-        text-align: center;
-        font-size: 16px;
-        border: 1px solid #00ffff;
-        border-radius: 4px;
-        background-color: rgba(0, 255, 255, 0.1);
-        color: #fff;
-    }
-
-    .whatsapp-button {
-        background-color: #25D366;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
-    .whatsapp-button:hover {
-        background-color: #128C7E;
-        transform: scale(1.05);
-    }
-
-    .whatsapp-button:active {
-        transform: scale(0.95);
-    }
-
-    .whatsapp-button::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: rotate(45deg);
-        animation: shine 3s linear infinite;
-    }
-
-    @keyframes shine {
-        0% {
-            transform: translateX(-100%) rotate(45deg);
-        }
-        100% {
-            transform: translateX(100%) rotate(45deg);
-        }
-    }
-
-    .group-button {
-        background-color: #00ffff;
-        border: none;
-        color: #1a1a1a;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        animation: pulse 2s infinite;
-    }
-
-    .group-button:hover {
-        background-color: #00cccc;
-        transform: scale(1.05);
-    }
-
-    .group-button:active {
-        transform: scale(0.95);
-    }
-
-    .group-button::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: rotate(45deg);
-        animation: shine 3s linear infinite;
-    }
-
-    .disclaimer {
-        font-size: 0.8em;
-        text-align: center;
-        margin-top: 20px;
-        color: #888;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-        100% {
-            transform: translateY(0px);
-        }
-    }
-
-    .fun-element {
-        position: fixed;
-        pointer-events: none;
-        animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
-        font-size: 60px;
-    }
-
-    #rollercoaster {
-        top: 10%;
-        left: 5%;
-    }
-
-    #ferriswheel {
-        bottom: 10%;
-        right: 5%;
-    }
-
-    #carousel {
-        top: 50%;
-        left: 2%;
-    }
-
-    #balloons {
-        bottom: 40%;
-        right: 2%;
-    }
+  }
+  .rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .star {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: twinkle 2s infinite;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
 </style>
 </head>
 <body>
-    <div class="neon-border"></div>
-    <header>
-        <h1>Casa dos Ingressos</h1>
-    </header>
-    <div class="container">
-        <p class="disclaimer">Todos os ingressos são emitidos em nome do comprador</p>
-        <p>Ingressos para Semana e Final de Semana</p>
+<div class="container">
+  <h1>Casa dos Ingressos</h1>
+  
+  <div class="highlight">CLIQUE AQUI E GARANTA O SEU DESCONTO</div>
+  
+  <a href="https://wa.me/5513974173380" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+    Fale Conosco no WhatsApp
+  </a>
+  <a href="https://chat.whatsapp.com/Fs70QG3210HH7Q9gaS4iAZ" class="btn">Junte-se ao Grupo de Indicação</a>
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Thermas dos Laranjais</h2>
-                <p>Aproveite as melhores piscinas e toboáguas do Brasil!</p>
-                <p class="price">R$ 100,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  <ul class="park-list">
+    <li class="park-item">
+      <div class="park-name">Thermas dos Laranjais</div>
+      <div class="park-description">Mergulhe na diversão! Pode desfrutar de mais de 50 atrações aquáticas, incluindo toboáguas radicais e relaxantes piscinas de ondas. Uma verdadeira experiência refrescante!</div>
+      <div class="park-price">R$ 100,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Aquário de SP</div>
+      <div class="park-description">Mergulhe em um oceano de maravilhas! Com mais de 250 espécies de animais marinhos, é uma aventura educativa e encantadora para todas as idades!</div>
+      <div class="park-price">R$ 50,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Zoológico de SP + Mundo dos Dinossauros</div>
+      <div class="park-description">Uma jornada épica através do tempo! Veja mais de 300 espécies de animais, incluindo a emocionante área dos dinossauros com modelos em tamanho real!</div>
+      <div class="park-price">R$ 50,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Animália Park</div>
+      <div class="park-description">Um paraíso de aventuras! Oferece várias atrações e encontros com animais, garantindo diversão para toda a família!</div>
+      <div class="park-price">R$ 90,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Hopi Hari</div>
+      <div class="park-description">Adrenalina pura! Desafie-se nas montanhas-russas de dar frio na barriga e aproveite um dia inteiro de diversão radical!</div>
+      <div class="park-price">R$ 90,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Magic City</div>
+      <div class="park-description">Um oásis de diversão! O maior parque aquático coberto da América Latina, com áreas para relaxar e se divertir com a família!</div>
+      <div class="park-price">R$ 50,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Beto Carrero</div>
+      <div class="park-description">Um mundo de fantasia e emoção! Este parque temático oferece atrações e espetáculos para todas as idades, além de uma interação única com personagens icônicos!</div>
+      <div class="park-price">R$ 80,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Smart Fit</div>
+      <div class="park-description">Sua melhor versão está aqui! Com várias unidades e equipamentos de última geração, você pode manter a sua rotina de exercícios em dia!</div>
+      <div class="park-price">R$ 80,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Natus's Barber (PG)</div>
+      <div class="park-description">Estilo sem limites! Um salão renomado que oferece cortes e serviços exclusivos, perfeito para renovar o visual!</div>
+      <div class="park-price">R$ 100,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+    <li class="park-item">
+      <div class="park-name">Camarote dos Ídolos do SÃO PAULO F.C (Open Bar e Food)</div>
+      <div class="park-description">Experiência VIP inigualável! Curta a melhor vista do show com open bar e food no camarote mais exclusivo do estádio!</div>
+      <div class="park-price">R$ 250,00</div>
+      <div class="quantity-control">
+        <button class="quantity-btn minus">-</button>
+        <span class="quantity">0</span>
+        <button class="quantity-btn plus">+</button>
+      </div>
+    </li>
+  </ul>
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Aquário de SP</h2>
-                <p>Explore o fascinante mundo marinho no coração de São Paulo!</p>
-                <p class="price">R$ 50,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  <div id="total">Total: R$ 0,00</div>
+</div>
+<div id="galaxy"></div>
+<svg class="rain" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    <radialGradient id="star" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:0" />
+    </radialGradient>
+  </defs>
+</svg>
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Zoológico de SP + Mundo dos Dinossauros</h2>
-                <p>Conheça animais de todo o mundo e viaje no tempo com os dinossauros!</p>
-                <p class="price">R$ 50,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  function createGalaxy() {
+    const galaxy = document.getElementById('galaxy');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = `${Math.random() * 3}px`;
+      star.style.height = star.style.width;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+      star.style.animationDelay = `${Math.random() * 3}s`;
+      galaxy.appendChild(star);
+    }
+  }
+  createGalaxy();
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Animália Park</h2>
-                <p>Diversão garantida para toda a família com animais e atrações!</p>
-                <p class="price">R$ 90,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  const quantityControls = document.querySelectorAll('.quantity-control');
+  const totalElement = document.getElementById('total');
+  const addToCartSound = document.getElementById('addToCartSound');
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Hopi Hari</h2>
-                <p>Aventure-se nas montanhas-russas e atrações radicais!</p>
-                <p class="price">R$ 90,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  quantityControls.forEach(control => {
+    const minusBtn = control.querySelector('.minus');
+    const plusBtn = control.querySelector('.plus');
+    const quantitySpan = control.querySelector('.quantity');
+    const priceElement = control.closest('.park-item').querySelector('.park-price');
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Magic City</h2>
-                <p>Divirta-se no maior parque aquático coberto da América Latina!</p>
-                <p class="price">R$ 50,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+    minusBtn.addEventListener('click', () => updateQuantity(-1));
+    plusBtn.addEventListener('click', () => updateQuantity(1));
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Beto Carrero</h2>
-                <p>O maior parque temático da América Latina espera por você!</p>
-                <p class="price">R$ 80,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+    function updateQuantity(change) {
+      let quantity = parseInt(quantitySpan.textContent);
+      quantity = Math.max(0, quantity + change);
+      quantitySpan.textContent = quantity;
+      updateTotal();
+      if (change > 0) {
+        addToCartSound.play();
+      }
+    }
+  });
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Smart Fit</h2>
-                <p>Mantenha-se em forma com acesso às melhores academias!</p>
-                <p class="price">R$ 80,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  function updateTotal() {
+    let total = 0;
+    quantityControls.forEach(control => {
+      const quantity = parseInt(control.querySelector('.quantity').textContent);
+      const price = parseFloat(control.closest('.park-item').querySelector('.park-price').textContent.replace('R$ ', '').replace(',', '.'));
+      total += quantity * price;
+    });
+    totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
+  }
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Natus's Barber (PG)</h2>
-                <p>Corte à vontade por 30 dias na melhor barbearia da região!</p>
-                <p class="price">R$ 100,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  // Star rain animation
+  const svg = document.querySelector('.rain');
+  const starCount = 150;
 
-        <div class="ticket">
-            <div class="ticket-info">
-                <h2>Camarote dos idolos do SÃO PAULO F.C open bar e food</h2>
-                <p>Entre para o camarote e curta a melhor vista do show!</p>
-                <p class="price">R$ 250,00</p>
-            </div>
-            <div class="quantity">
-                <button onclick="decreaseQuantity(this)">-</button>
-                <input type="number" value="0" min="0" onchange="updateQuantity(this)">
-                <button onclick="increaseQuantity(this)">+</button>
-            </div>
-        </div>
+  for (let i = 0; i < starCount; i++) {
+    let star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    star.setAttribute("cx", Math.random() * 100 + "%");
+    star.setAttribute("cy", Math.random() * 100 + "%");
+    star.setAttribute("r", Math.random() * 2 + 0.5);
+    star.setAttribute("fill", "url(#star)");
+    
+    let animateY = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    animateY.setAttribute("attributeName", "cy");
+    animateY.setAttribute("from", "-10%");
+    animateY.setAttribute("to", "110%");
+    animateY.setAttribute("dur", (Math.random() * 15 + 5) + "s");
+    animateY.setAttribute("repeatCount", "indefinite");
 
-        <div id="total-container" class="ticket">
-            <div class="ticket-info">
-                <h2>Total</h2>
-                <p id="total-price" class="price">R$ 0,00</p>
-            </div>
-        </div>
+    let animateX = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    animateX.setAttribute("attributeName", "cx");
+    animateX.setAttribute("from", star.getAttribute("cx"));
+    animateX.setAttribute("to", (parseFloat(star.getAttribute("cx")) + (Math.random() * 20 - 10)) + "%");
+    animateX.setAttribute("dur", (Math.random() * 15 + 5) + "s");
+    animateX.setAttribute("repeatCount", "indefinite");
 
-        <button class="whatsapp-button" onclick="comprarNoWhatsApp()">Comprar no WhatsApp</button>
-        <button class="group-button" onclick="entrarNoGrupo()">Entrar no Grupo do WhatsApp</button>
-    </div>
-
-    <div class="fun-element" id="rollercoaster">🎢</div>
-    <div class="fun-element" id="ferriswheel">🎡</div>
-    <div class="fun-element" id="carousel">🎠</div>
-    <div class="fun-element" id="balloons">🎈</div>
-
-    <script>
-        function decreaseQuantity(button) {
-            const input = button.nextElementSibling;
-            if (input.value > 0) {
-                input.value = parseInt(input.value) - 1;
-                updateQuantity(input);
-            }
-        }
-
-        function increaseQuantity(button) {
-            const input = button.previousElementSibling;
-            input.value = parseInt(input.value) + 1;
-            updateQuantity(input);
-        }
-
-        function updateQuantity(input) {
-            input.value = Math.max(0, parseInt(input.value));
-            updateTotal();
-        }
-
-        function updateTotal() {
-            let total = 0;
-            const tickets = document.querySelectorAll('.ticket');
-            
-            tickets.forEach(ticket => {
-                const priceElement = ticket.querySelector('.price');
-                if (priceElement) {
-                    const price = parseFloat(priceElement.innerText.replace('R$ ', '').replace(',', '.'));
-                    const quantity = parseInt(ticket.querySelector('input')?.value || 0);
-                    total += price * quantity;
-                }
-            });
-            
-            document.getElementById('total-price').innerText = `R$ ${total.toFixed(2)}`;
-        }
-
-        function comprarNoWhatsApp() {
-            let message = "Olá! Gostaria de comprar os seguintes ingressos:\n\n";
-            let total = 0;
-            const tickets = document.querySelectorAll('.ticket');
-            
-            tickets.forEach(ticket => {
-                const title = ticket.querySelector('h2')?.innerText;
-                const priceElement = ticket.querySelector('.price');
-                if (title && priceElement) {
-                    const price = parseFloat(priceElement.innerText.replace('R$ ', '').replace(',', '.'));
-                    const quantity = parseInt(ticket.querySelector('input')?.value || 0);
-                    
-                    if (quantity > 0) {
-                        message += `${title}: ${quantity} x R$ ${price.toFixed(2)} = R$ ${(price * quantity).toFixed(2)}\n`;
-                        total += price * quantity;
-                    }
-                }
-            });
-            
-            message += `\nTotal: R$ ${total.toFixed(2)}`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/5513974173380?text=${encodedMessage}`, '_blank');
-        }
-
-        function entrarNoGrupo() {
-            window.open('https://chat.whatsapp.com/Fs70QG3210HH7Q9gaS4iAZ', '_blank');
-        }
-
-        updateTotal();
-    </script>
+    star.appendChild(animateY);
+    star.appendChild(animateX);
+    svg.appendChild(star);
+  }
+});
+</script>
 </body>
 </html>
